@@ -1,26 +1,35 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
-import { useSelector } from 'react-redux';
+import { Button } from 'primereact/button';
+import {addTodo} from '../redux/todoReducer';
 
 const AddItem = () => {
-    const [newItem, setItem] = useState({text: ''});
+    const [newItem, setItem] = useState({ text: '' });
 
     const test = useSelector(state => state.todo);
-    console.log(test)
+    const dispatch = useDispatch();
+
+    const addNewTodo = () => {
+        dispatch(addTodo(newItem.text));
+    }
+
     return (
-        <div className="p-field">
-            <label htmlFor="newTodo" className="p-d-block">Username</label>
-            <InputText
-                className=""
-                value={newItem.text}
-                onChange={(e) => setItem({ newItem: e.target.value })}
-                placeholder="Add New TODO"
-                aria-describedby="newTodo-help"
-                id="newTodo"
-            />
-            <small id="newTodo-help" className="p-d-block">Enter your username to reset your password.</small>
-
-
+        <div className="addTodo p-my-3">
+            <div className="p-field p-fluid">
+                <label htmlFor="newTodo">Add New TODO</label>
+                <InputText
+                    className=""
+                    value={newItem.text}
+                    onChange={(e) => setItem({ text: e.target.value })}
+                    placeholder="Add New TODO"
+                    aria-describedby="newTodo-help"
+                    id="newTodo"
+                />
+                <small id="newTodo-help">Enter your username to reset your password.</small>
+                <Button className="p-mt-3" type="button" label="Add" onClick={() => addNewTodo()}/>
+            </div>
+           
         </div>
     )
 }

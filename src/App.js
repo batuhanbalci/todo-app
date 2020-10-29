@@ -1,12 +1,12 @@
 import './App.css';
 import Menu from './components/menu';
-import AddItem from './components/addItem';
+import Content from './components/content';
 
 function App() {
   return (
     <div className="App">
       <Menu />
-      <AddItem />
+      <Content />
     </div>
   );
 }
