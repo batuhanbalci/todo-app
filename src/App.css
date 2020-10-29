@@ -1,4 +1,17 @@
-.addTodo {
+.content {
   width: 768px;
   margin:0 auto;
+}
+
+.addTodo {
+  
+}
+
+.todoBox {
+  text-align: center;
+}
+
+/* Overrides */
+.p-inputtext.p-error:focus, .p-inputtext.p-invalid:focus{
+  border-color: #f44336 !important;
 }

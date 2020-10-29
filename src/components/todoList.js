@@ -8,15 +8,16 @@ const TodoList = () => {
     const todoState = useSelector(state => state.todo);
 
     return (
-        <div className="todoList p-my-3">
+        <div className="todoList p-my-2">
             {
                 todoState.todos.map(
-                    todo => {
+                    (todo, i) => {
                         return (
-                            <div className="todoBox card p-shadow-3 p-py-3">
+                            <div className="todoBox card p-shadow-3 p-py-2 p-px-2 p-mt-3" key={i}>
                                 <p>{todo}</p>
                             </div>
                         )
+                        
                     }
                 )
             }

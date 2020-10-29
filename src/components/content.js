@@ -4,10 +4,10 @@ import TodoList from './todoList';
 
 const Content = () => {
     return (
-        <React.Fragment>
+        <div className="content">
             <AddItem />
             <TodoList />
-        </React.Fragment>
+        </div>
     )
 }
 

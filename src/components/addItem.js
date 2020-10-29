@@ -1,35 +1,46 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import {addTodo} from '../redux/todoReducer';
+import { addTodo } from '../redux/todoReducer';
 
 const AddItem = () => {
-    const [newItem, setItem] = useState({ text: '' });
+    let inputRef = React.createRef();
 
-    const test = useSelector(state => state.todo);
+    const [newTodo, setItem] = useState({ text: '', isValid: true });
+
     const dispatch = useDispatch();
 
     const addNewTodo = () => {
-        dispatch(addTodo(newItem.text));
+        if (newTodo.text.trim() === '') {
+            setItem({ ...newTodo, isValid: false });
+        }
+        else {
+            dispatch(addTodo(newTodo.text));
+            setItem({ text: '', isValid: true });
+        }
     }
+
+    useEffect(() => {
+        inputRef.element.focus();
+    });
 
     return (
         <div className="addTodo p-my-3">
-            <div className="p-field p-fluid">
+            <div className={newTodo.isValid ? 'p-field p-fluid' : 'p-field p-fluid p-invalid'}>
                 <label htmlFor="newTodo">Add New TODO</label>
                 <InputText
-                    className=""
-                    value={newItem.text}
-                    onChange={(e) => setItem({ text: e.target.value })}
+                    className={newTodo.isValid ? '' : 'p-invalid'}
+                    value={newTodo.text}
+                    onChange={(e) => setItem({ ...newTodo, text: e.target.value})}
                     placeholder="Add New TODO"
                     aria-describedby="newTodo-help"
                     id="newTodo"
+                    ref={e => inputRef = e}
                 />
-                <small id="newTodo-help">Enter your username to reset your password.</small>
-                <Button className="p-mt-3" type="button" label="Add" onClick={() => addNewTodo()}/>
+                <small id="newTodo-help">Type your TODO</small>
+                <Button className="p-mt-3" type="button" label="Add" onClick={() => addNewTodo()} />
             </div>
-           
         </div>
     )
 }
