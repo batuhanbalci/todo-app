@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { addTodo } from '../redux/todoReducer';
+import { addTodo } from '../redux/todo';
 
 const AddItem = () => {
     let inputRef = React.createRef();
